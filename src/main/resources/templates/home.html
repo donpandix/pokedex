@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+    <title>POKEDEX</title>
+    <!-- Simple bar CSS -->
+    <link rel="stylesheet" href="css/simplebar.css">
+    <!-- Fonts CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Icons CSS -->
+    <link rel="stylesheet" href="css/feather.css">
+    <!-- Date Range Picker CSS -->
+    <link rel="stylesheet" href="css/daterangepicker.css">
+    <!-- App CSS -->
+    <link rel="stylesheet" href="css/app-light.css" id="lightTheme">
+    <link rel="stylesheet" href="css/app-dark.css" id="darkTheme" disabled>
+    <link rel="stylesheet" href="css/pokemon.css" >
+  </head>
+  <body class="vertical  light  ">
+    <div class="wrapper">
+      <nav class="topnav navbar navbar-light">
+        <button type="button" class="navbar-toggler text-muted mt-2 p-0 mr-3 collapseSidebar">
+          <i class="fe fe-menu navbar-toggler-icon"></i>
+        </button>
+        <form class="form-inline mr-auto searchform text-muted">
+          <input class="form-control mr-sm-2 bg-transparent border-0 pl-4 text-muted" type="search" placeholder="Type something..." aria-label="Search">
+        </form>
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link text-muted my-2" href="#" id="modeSwitcher" data-mode="light">
+              <i class="fe fe-sun fe-16"></i>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <aside class="sidebar-left border-right bg-white shadow" id="leftSidebar" data-simplebar>
+        <a href="#" class="btn collapseSidebar toggle-btn d-lg-none text-muted ml-2 mt-3" data-toggle="toggle">
+          <i class="fe fe-x"><span class="sr-only"></span></i>
+        </a>
+        <nav class="vertnav navbar navbar-light">
+          <!-- nav bar -->
+          <div class="w-100 mb-4 d-flex">
+            <a class="navbar-brand mx-auto mt-2 flex-fill text-center" href="./">
+              <svg version="1.1" id="logo" class="navbar-brand-img brand-sm" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 120 120" xml:space="preserve">
+                <g>
+                  <polygon class="st0" points="78,105 15,105 24,87 87,87 	" />
+                  <polygon class="st0" points="96,69 33,69 42,51 105,51 	" />
+                  <polygon class="st0" points="78,33 15,33 24,15 87,15 	" />
+                </g>
+              </svg>
+            </a>
+          </div>
+
+          <ul class="navbar-nav flex-fill w-100 mb-2">
+            <li class="nav-item active">
+                <a class="nav-link pl-3" href="./">
+                    <i class="fe fe-globe fe-16"></i><span class="ml-1 item-text">Pokedex</span>
+                </a>
+            </li>
+          </ul>
+
+        </nav>
+      </aside>
+      <main role="main" class="main-content">
+        <div class="container-fluid">
+          <div class="row justify-content-center">
+            <div class="col-12">
+              <h1 class="page-title">Pokedex</h1>
+
+                <div th:if="${error}">
+                    <p th:text="${error}"></p>
+                </div>
+
+
+                <div th:if="${pokemonList}">
+
+                    <div class="row items-align-baseline">
+                        <div class="col-md-12 col-lg-4"  th:each="pokemon : ${pokemonList}">
+                          <div class="card shadow eq-card mb-4">
+                            <div class="card-body mb-n3">
+                              <div class="row items-align-baseline h-100">
+                                
+                                <div class="col-md-6 my-3">
+                                  <p class="mb-0"><strong class="mb-0 text-uppercase text-muted">Pokemon Name</strong></p>
+                                  <h3 th:text="${pokemon.name}">-</h3>
+                                  <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                </div>
+
+                                <div class="col-md-6 my-4 text-center">
+                                    <div lass="chart-box mx-4" style="position: relative;">
+                                        <img th:src="${pokemon.sprites.other.officialArtwork.frontDefault}" class="pokeimage" />
+                                        <!--
+                                        <img th:src="${pokemon.sprites.other.showDown.frontDefault}" class="" />
+                                        -->
+                                    </div>
+                                </div>
+                                <div class="col-md-4 border-top py-3">
+                                  <p class="mb-1"><strong class="text-muted">Height</strong></p>
+                                  <h4 class="mb-0" th:text="${pokemon.height}">0</h4>
+                                  <p class="small text-muted mb-0"><span>Meters</span></p>
+                                </div> <!-- .col -->
+                                <div class="col-md-4 border-top py-3">
+                                  <p class="mb-1"><strong class="text-muted">Weight</strong></p>
+                                  <h4 class="mb-0" th:text="${pokemon.weight}">0</h4>
+                                  <p class="small text-muted mb-0"><span>Kilograms</span></p>
+                                </div> <!-- .col -->
+                                <div class="col-md-4 border-top py-3">
+                                    <p class="mb-1"><strong class="text-muted">Experience</strong></p>
+                                    <h4 class="mb-0" th:text="${pokemon.baseExperience}">0</h4>
+                                    <p class="small text-muted mb-0"><span>Level of experience</span></p>
+                                  </div> <!-- .col -->
+                              </div>
+                            </div> <!-- .card-body -->
+                          </div> <!-- .card -->
+                        </div> <!-- .col -->
+                      </div>
+
+                      <nav aria-label="Table Paging" class="my-3">
+                        <ul class="pagination justify-content-end mb-0">
+
+                          <!-- boton de pagina anterior valida si  linkPaginaSiguiente no es vacio -->
+                          <div th:if="${offset > 0}">
+                            <li class="page-item"><a class="page-link" th:href="${linkPaginaAnterior}">Previous</a></li>
+                          </div>
+
+                          <!-- lista de paginas existentes con un ciclo for desde 0 a totalPages -->
+                           <!--
+                          <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPages)}">
+                            <a class="page-link" th:href="@{'./?page=' + ${i}}" th:text="${i}">1</a>
+                          </li>
+                        -->
+
+                          <!-- boton de pagina siguiente -->
+                          <div th:if="${offset < count}">
+                            <li class="page-item"><a class="page-link" th:href="${linkPaginaSiguiente}">Next</a></li>
+                          </div>
+
+                        </ul>
+                      </nav>
+
+                </div>
+
+
+            </div> <!-- .col-12 -->
+          </div> <!-- .row -->
+        </div> <!-- .container-fluid -->
+
+      </main> <!-- main -->
+    </div> <!-- .wrapper -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/moment.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/simplebar.min.js"></script>
+    <script src='js/daterangepicker.js'></script>
+    <script src='js/jquery.stickOnScroll.js'></script>
+    <script src="js/tinycolor-min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/apps.js"></script>
+  </body>
+</html>
